@@ -3,14 +3,32 @@ import { StyleSheet, Text, View, Button, Alert, TouchableOpacity } from 'react-n
 
 export default class App extends React.Component {
 
-  myButtonPressed(){
-    Alert.alert("Back Ground chnaged");
+  constructor(){
+    super();
+    this.state = {
+      randomColor: null
+    };
+  }
 
+  getRandomColor =() =>{
+    return(
+      "rgb("+
+      Math.floor((Math.random() * 256)) +
+      ","+
+      Math.floor((Math.random() * 256)) +
+      ","+
+      Math.floor((Math.random() * 256)) +
+      ")"
+    )
+  }
+
+  myButtonPressed =() =>{
+    this.setState({ randomColor : this.getRandomColor()})
   }
 
   render(){
     return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: this.state.randomColor}]}>
       <TouchableOpacity
       onPress={this.myButtonPressed}>
       <View style = {styles.text}>
@@ -36,7 +54,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#BB2CD9",
     paddingVertical: 10,
     paddingHorizontal: 40,
-    borderRadius: 15
+    borderRadius: 15,
+    borderColor: "#ffffff"
   },
 
 });
